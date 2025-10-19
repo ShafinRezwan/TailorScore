@@ -8,7 +8,7 @@ import { usePuterStore } from "~/lib/puter";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "To Job or Not" },
+    { title: "Fix My Resume" },
     { name: "description", content: "Resume Feedback to find you a job!" },
   ];
 }
