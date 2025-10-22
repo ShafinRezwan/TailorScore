@@ -35,7 +35,7 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
               onClick={(e) => e.stopPropagation()}
             >
               <img
-                src="app/assets/images/pdf.png"
+                src="../app/assets/images/pdf.png"
                 alt="pdf"
                 className="size-20"
               />
@@ -62,7 +62,7 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
             <div>
               <div className="mx-auto w-16 h-16 flex items-center justify-center mb-2">
                 <img
-                  src="app/assets/icons/info.svg"
+                  src="../app/assets/icons/info.svg"
                   alt="upload"
                   className="size-20"
                 />
