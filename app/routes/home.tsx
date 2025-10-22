@@ -4,7 +4,7 @@ import Navbar from "~/components/Navbar";
 import ResumeCard from "~/components/ResumeCard";
 import { Link, useNavigate } from "react-router";
 import { usePuterStore } from "~/lib/puter";
-
+import WipeApp from "./wipe";
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "TailorScore" },
@@ -13,10 +13,21 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  const { auth, kv } = usePuterStore();
+  const { auth, kv, fs } = usePuterStore();
   const naviagate = useNavigate();
   const [resumes, setResumes] = useState<Resume[]>([]);
   const [loadingResumes, setLoadingResumes] = useState(false);
+
+  const [files, setFiles] = useState<FSItem[]>([]);
+
+  const loadFiles = async () => {
+    const files = (await fs.readDir("./")) as FSItem[];
+    setFiles(files);
+  };
+
+  useEffect(() => {
+    loadFiles();
+  }, []);
 
   useEffect(() => {
     if (!auth.isAuthenticated) naviagate("/auth?next=/");
@@ -37,6 +48,15 @@ export default function Home() {
     };
     loadResumes();
   }, []);
+
+  const handleDelete = async () => {
+    files.forEach(async (file) => {
+      await fs.delete(file.path);
+    });
+    await kv.flush();
+    loadFiles();
+  };
+
   return (
     <main className="w-full h-full bg-animated-gradient">
       <Navbar />
@@ -46,7 +66,7 @@ export default function Home() {
             Track Your Applications & Resume Ratings
           </h1>
           {!loadingResumes && resumes?.length === 0 ? (
-            <h2>No resumes found. Upload youe first resume to get feedback.</h2>
+            <h2>No resumes found. Upload your first resume to get feedback.</h2>
           ) : (
             <h2>Review your submissions and check AI-powered feedback.</h2>
           )}
@@ -70,8 +90,12 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <button className="wipe-button mt-4" onClick={() => setResumes([])}>
-              Clear All Resumes
+            <button
+              className="wipe-button mt-4"
+              onClick={() => handleDelete()}
+              title="Delete all resumes"
+            >
+              Clear all resumes
             </button>
           </div>
         )}
@@ -80,7 +104,7 @@ export default function Home() {
           <div className="flex flex-col items center justify-center mt-10 gap-4">
             <Link
               to="/upload"
-              className="primary-button w-fit text-xl font-semibold"
+              className="upload-resume-button w-fit text-xl font-semibold"
             >
               Upload Resume
             </Link>

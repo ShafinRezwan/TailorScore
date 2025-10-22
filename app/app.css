@@ -60,6 +60,9 @@ form {
   .primary-button {
     @apply primary-gradient text-white rounded-full px-4 py-2 cursor-pointer w-full;
   }
+  .upload-resume-button {
+    @apply upload-gradient text-white rounded-full px-4 py-2 cursor-pointer w-full;
+  }
   .submit-button {
     @apply bg-green-700 font-bold text-white rounded-full px-4 py-4 cursor-pointer w-full;
   }
@@ -140,6 +143,11 @@ form {
   box-shadow: 0px 74px 21px 0px #6678ef00;
 }
 
+@utility upload-gradient {
+  background: linear-gradient(to bottom, #3781db, #2b8bff);
+  box-shadow: 0px 74px 21px 0px #6678ef00;
+}
+
 @utility primary-gradient-hover {
   background: linear-gradient(to bottom, #717dff, #4957eb);
 }
@@ -159,7 +167,14 @@ form {
 }
 
 @utility bg-animated-gradient {
-  background-image: linear-gradient(-60deg, #003cab, #3b8dff, #d4deff);
+  background-image: linear-gradient(
+    145deg,
+    #d4deff,
+    #ffcd34,
+    #3b8dff,
+    #0d63db,
+    #ffee52
+  );
   background-size: 200% 200%;
   animation: bgGradientMove 8s ease infinite;
 }
