@@ -63,6 +63,9 @@ form {
   .submit-button {
     @apply bg-green-700 font-bold text-white rounded-full px-4 py-4 cursor-pointer w-full;
   }
+  .wipe-button {
+    @apply bg-red-700 font-bold text-white rounded-full px-4 py-4 cursor-pointer;
+  }
   .resume-nav {
     @apply flex flex-row justify-between items-center p-4 border-b border-gray-200;
   }

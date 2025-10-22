@@ -7,7 +7,7 @@ import { usePuterStore } from "~/lib/puter";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Fix My Resume" },
+    { title: "TailorScore" },
     { name: "description", content: "Resume Feedback to find you a job!" },
   ];
 }
@@ -65,13 +65,12 @@ export default function Home() {
           <div className="flex flex-col items-center justify-center">
             <div className="resumes-section">
               {resumes.map((resume) => (
-                <ResumeCard key={resume.id} resume={resume} />
+                <div key={resume.id} className="relative">
+                  <ResumeCard resume={resume} />
+                </div>
               ))}
             </div>
-            <button
-              className="bg-red-600 font-bold text-white rounded-2xl px-20 py-2 cursor-pointer mt-4"
-              onClick={() => setResumes([])}
-            >
+            <button className="wipe-button mt-4" onClick={() => setResumes([])}>
               Clear All Resumes
             </button>
           </div>
